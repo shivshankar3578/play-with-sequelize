@@ -1,0 +1,93 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+
+			<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> Add Users </h2>
+					</div>
+					<div class="body">
+						<form id="form_validation"  method="POST" novalidate="novalidate"  enctype="multipart/form-data">
+							<div class="form-group form-float">
+								<label class="form-label required">Name</label>
+								<div class="form-line">
+									<input class="form-control" name="name" type="text" required>
+							</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">Email</label>
+								<div class="form-line">
+									<input class="form-control" name="email" type="email" onblur="return isValidEmail(email);" required>
+							</div>
+							</div>
+							<div class="form-group form-float">
+								<label class="form-label required">Password</label>
+								<div class="form-line error">
+									<input class="form-control" name="password" type="password" minlength="8"  maxlength="15" required>
+							</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">Address</label>
+								<div class="form-line">
+									<input class="form-control"  name="address" required>
+							</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">DOB</label>
+								<div class="form-line">
+										<input type="text" id="datepicker"  class="form-control date" name="date_of_birth" required/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label">Gender</label>
+								<input name="gender" id="male" value="1" class="with-gap" type="radio" checked>
+								<label for="male">Male</label>
+								<input name="gender" id="female" value="2" class="with-gap" type="radio">
+								<label for="female" class="m-l-20">Female</label>
+								<input name="gender" id="other" value="3" class="with-gap" type="radio">
+								<label for="other" class="m-l-20">Other</label>
+							</div>
+						
+							 <div class="form-group form-float">
+								
+									<label class="form-label required">Select Picture</label>
+									<div class="form-line">
+										<input name="file" type="file" required class="btn waves-effect"/>
+									</div>
+								
+							</div>
+							<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+							<a href="/admin/users" class="btn btn-primary waves-effect">BACK</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<script src="/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#datepicker").bootstrapMaterialDatePicker({
+		weekStart : 0,
+		minDate:"1970-01-01",
+		maxDate: new Date(),
+		time: false }).on('change', function(e, date)
+		{
+			$('#datepicker').parent('div').parent('div').find('#datepicker-error').hide();
+		});
+});
+</script>
+<script>
+	$(document).ready(function () {
+	$('input[type=file]').change(function () {
+		var val = $(this).val().toLowerCase();
+		var regex = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+		if(!(regex.test(val))) {
+			$(this).val('');
+			alert("Please select correct file format")
+		}
+		});
+	});
+</script>
+{% endblock %}

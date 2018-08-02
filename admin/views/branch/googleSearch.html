@@ -1,0 +1,31 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> Search Places on Google </h2>
+					</div>
+					<div class="body">
+						<form id="form_validation"  method="get" novalidate="novalidate" enctype="multipart/form-data">
+
+							<div class="form-group form-float">
+								<label class="form-label required"> Search </label>
+								<div class="form-line">
+									<select name="search" required class="form-control">
+										{% for bank in banks %}
+											<option value="{{ bank.bankname+','+bank.id }}"> {{bank.bankname}} </option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+						
+							<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+							<a href="/admin/prefs" class="btn btn-primary waves-effect">BACK</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}

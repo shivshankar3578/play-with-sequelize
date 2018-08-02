@@ -1,0 +1,86 @@
+{% extends "layouts/list.html" %} {% block pagewrapper %}
+<section class="content">
+	 <div class="container-fluid">
+			<!-- Exportable Table -->
+			<div class="row clearfix">
+				 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="card">
+							 <div class="header">
+									<h2> TestApp: All Cards  </h2>
+									<a style="float: right" model-name="card"  class="btn btn-danger waves-effect ajax_deleteAll"> Delete selected</a>
+							 </div>
+							 <div class="body">
+									<div class="table-responsive">
+										 	<table id="datalist" class="table table-bordered table-striped table-hover dataTable js-basic-example">
+												<thead>
+													 <tr>
+													 	<th> </th>
+															<th>S.No </th>
+															<th>Cardname</th>
+															<th>Networks</th>
+															<!-- <th>Minimum Interest</th>
+															<th>Penalty</th> -->
+															<th>Updated By </th>
+															<!-- <th>Issuer Name</th> -->
+															<th data-sortable="false"> Submitted </th>
+															<th data-sortable="false"> Published </th>
+															<th data-sortable="false">Action</th>
+													 </tr>
+												</thead>
+												<tbody>
+													 {% for card in cards %}
+													 	<tr id="del_{{card.id}}">
+															<td></td>
+															<td>{{ loop.index }}</td>
+															<td>{{ card.cardname }}</td>
+															<td>{{ card.network }}</td>
+															<!-- <td>{{ card.min_intrest }}</td>
+															<td>{{ card.penalty }}</td> -->
+															<td>{{ card.updatedBy.name }}</td>
+															<td>{{card.bank.bankname}}</td>
+															<td data-sort="{{card.status}}">
+																 {% if card.is_published==1 or card.status==1 %}
+																 <a class="btn btn-primary waves-effect">Already Submitted </a>
+
+																 {% elseif card.is_created==1 %}
+																 <div class="switch">
+																		<label class="subspcard_stat">
+																		<input checked="checked" type="checkbox" data-id="{{card.id}}">
+																		<span class="lever switch-col-{{theme}}"></span></label>
+																 </div>
+																 {% else %}
+																 <div class="switch">
+																		<label class="subspcard_stat">
+																		<input type="checkbox" data-id="{{card.id}}">
+																		<span class="lever switch-col-{{theme}}"></span></label>
+																 </div>
+																 {% endif %}
+															</td>
+															<td data-sort="{{card.status}}">
+																 {% if card.is_published==1 %}
+																 	<a class="btn btn-success waves-effect">Published </a>
+																 	{% else %}
+																 	<a class="btn btn-default waves-effect"> Not Published </a>
+																 	{% endif %}
+															</td>
+															<td>
+																	<a href="/admin/cards/view/{{card.id}}" ><i class="material-icons col-{{theme}}">folder_open</i></a>
+																	{% if card.is_published==1 %}
+																	{% else %}
+																<a href="/admin/cards/edit/{{card.id}}" name="edit" value="edit"><i class="material-icons col-{{theme}}">edit</i></a>
+																		{% endif %}
+															</td>
+													 </tr>
+													 
+													 {% endfor %}
+												</tbody>
+										 </table>
+									</div>
+							 </div>
+						</div>
+				 </div>
+			</div>
+			<!-- #END# Exportable Table -->
+	 </div>
+</section>
+{% endblock %}

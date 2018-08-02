@@ -1,0 +1,72 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+		<!-- Exportable Table -->
+		<div class="row clearfix"> 
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+				<div class="card"> 
+					<div class="header"> 
+						<h2> View Enquiry  </h2>
+					 </div>
+				<div>
+				<div class="body"> 
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Companey Name </label>
+							<span> {{enquiry.company_name}} </span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Employment Type  </label>
+							<span> {{enquiry.employment_type}} </span>
+						 </div>
+					 </div>
+					 
+					 
+				<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">  Month Salary </label>
+							<span>{{enquiry.month_salary}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> DOB </label>
+							<span> {{enquiry.date_of_birth}}<span>
+						 </div>
+					 </div>
+
+					 <div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Name </label>
+							<span>{{enquiry.name}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Mobile </label>
+							<span> {{enquiry.mobile}}<span>
+						 </div>
+					 </div>
+
+					 <div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Email </label>
+							<span>{{enquiry.email}} <span>
+						 </div>
+
+						 
+				 </div>
+
+				 <div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Bank Name </label>
+							<span>{{enquiry.card.bank.bankname }} <span>
+						 </div>
+
+			 </div>
+			 <div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Card Name </label>
+							<span>{{enquiry.card.cardname}} <span>
+			</div>
+
+						 
+				 </div>
+		 </div>
+	 </div>
+{% endblock %}

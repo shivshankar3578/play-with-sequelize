@@ -1,0 +1,82 @@
+{% extends "layouts/list.html" %} {% block pagewrapper %}
+<section class="content">
+	<div class="container-fluid">
+		<!--  <a href="/pages/add" class="btn btn-success" role="button">Add</a>-->
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2>TestApp: All Reviews & Ratings  </h2>
+					
+					 <!-- <select class="statusSlected">
+						<option value="1">Enable</option>
+						<option value="0">Disable</option>
+					</select> 
+					<span class="ajax_chnageStatusAll" model-name="rate"> Change Status</span> -->
+
+					</div>
+					<div class="body">
+						<div class="table-responsive">
+					<table id="datalist" class="table table-bordered table-striped table-hover  js-basic-example">
+								<thead>
+									<tr>
+										<th> </th>
+										<th>S.no</th>
+										<th>Issuer Name</th>	
+										<th> Username </th>	
+										<th> Rating </th>						
+										<th> Review </th>	
+										<!-- <th data-sortable="false">Action</th> -->
+									</tr>
+								</thead>
+								<tbody>
+									{% for review in reviews %}
+									<tr id="del_{{review.id}}">
+										<td></td>
+										<td>{{ loop.index }}</td>
+										<td>{{ review.bank.bankname }}</td>
+										<td>{{ review.user.name }}</td>
+									<td class="stars">{{ review.rate  }}</td>
+									<td>{{ review.review }}</td>
+										<!-- <td>									
+										<a model-name="rate" data-value="{{review.id}}" class="ajax_delete"><i class="material-icons col-{{theme}}">delete</i></a>
+										</td> -->
+									</tr>
+									
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- #END# Exportable Table -->
+	</div>
+</section>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+<script type="text/javascript">
+	 $.fn.stars = function() {
+				return $(this).each(function() {
+
+						var rating = parseInt($(this).text());
+
+						var numStars = 5
+
+						var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fa fa-star"></i>');
+
+						var halfStar = ((rating%1) !== 0) ? '<i class="fa fa-star-half-empty"></i>': '';
+
+						var noStar = new Array(Math.floor(numStars + 1 - rating)).join('<i class="fa fa-star-o"></i>');
+
+						$(this).html(fullStar + halfStar + noStar);
+
+				});
+		}
+
+	$('.stars').stars();
+
+</script>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> Edit Issuer </h2>
+					</div>
+					<div class="body">
+						<form id="form_validation" method="POST" novalidate="novalidate" enctype="multipart/form-data">
+								<div class="form-group form-float">
+								<label class="form-label required">Issuer Name</label>
+								<div class="form-line">
+									<input class="form-control" name="bankname" type="text" required value="{{bank.bankname}}">
+								</div>
+							</div>
+
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+								<span class="image"><img src="{{bank.banklogo}}" width="200px"></span>
+							</div>
+						 <div class="row clearfix">
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+									<label class="form-label required">Issuer Logo</label>
+									<input name="banklogo" type="file" class="btn waves-effect" />
+								</div>
+							</div><br>											
+								 
+
+							<div class="form-group form-float">
+								<label class="form-label required">Web Site</label>
+								<div class="form-line">
+									<input class="form-control" name="website" type="text" required value="{{bank.website}}">
+
+								</div>
+							</div>
+							<div class="form-group form-float">
+								<label class="form-label required">Toll Free</label>
+								<div class="form-line">
+									<input class="form-control" name="tollfree" type="text" required value="{{bank.tollfree}}">
+
+								</div>
+							</div>
+
+					<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+					<a href="/admin/banks" class="btn btn-primary waves-effect">BACK</a>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	<script>
+	$(document).ready(function () {
+		var _URL = window.URL || window.webkitURL;
+		function isGoodImage(file) {
+			console.log(`here`);
+		var deferred = jQuery.Deferred();
+		var image = new Image();
+		
+		image.onload = function() {
+				// Check the image resolution
+				if(this.width >= 1024 && this.height >= 640 && this.width/this.height === 1.6) 
+						deferred.resolve(true);
+				 else 
+						deferred.resolve(false);
+		};
+		
+		image.onerror = function() {
+				deferred.resolve(false);
+		}
+		image.src = _URL.createObjectURL(file);
+		
+		return deferred.promise();
+}
+	$('input[type=file]').change(function () {
+		var self = this
+		var val = $(this).val().toLowerCase();
+		var regex = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+
+		isGoodImage(this.files[0]).
+		then(function(isGood) {
+			 if(!isGood) {
+				$(self).val('');
+				alert("Please select correct file size")
+			}
+			else{
+				$(self).parent().find('label.error').remove()
+			}
+		})
+		
+		});
+	});
+</script>
+
+{% endblock %}

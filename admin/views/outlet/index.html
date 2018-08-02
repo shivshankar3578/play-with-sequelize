@@ -1,0 +1,81 @@
+{% extends "layouts/list.html" %} {% block pagewrapper %}
+<section class="content">
+	<div class="container-fluid">
+		<!--  <a href="/pages/add" class="btn btn-success" role="button">Add</a>-->
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> TestApp: All Outlets </h2>
+						<a style="float: right" model-name="outlet"  class="btn btn-danger waves-effect ajax_deleteAll"> Delete selected</a>&nbsp
+						<a href="/admin/outlets/fromGoogle" style="float: right" class="btn btn-primary waves-effect"> Add From Google</a> 
+						<a style="float: right" model-name="outlet"  model-status="1"  class="btn btn-success waves-effect ajax_chnageStatusAll"> Activate selected</a>
+						<a style="float: right" model-name="outlet"  model-status="0"  class="btn btn-warning waves-effect ajax_chnageStatusAll"> Deactivate selected</a>
+					</div>
+					<div class="body">
+						<div class="table-responsive">
+							<table id="datalist" class="table table-bordered table-striped table-hover dataTable js-basic-example">
+								<thead>
+									<tr>
+										<th> </th>
+										<th>S.no</th>
+										<th>Name</th>
+										<th>Address</th>
+									<!-- 	<th>Redeem rate </th>
+										<th>Offers for card name</th> -->
+										<th>Logo</th>
+										<th>Status</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for outlet in outlets %}
+									<tr id="del_{{outlet.id}}">
+										<td> </td>
+										<td>{{ loop.index }}</td>
+										<td>{{ outlet.name }}</td>
+										<td>{{ outlet.address }}</td>
+										<!-- <td>{{ outlet.redeem_rate }}</td>
+										<td>{{ outlet.offers_for_card }}</td> -->
+										<td><img src="{{outlet.logo}}" width="80"></td>
+										<td>
+											{% if outlet.status==1 %}
+											<div class="switch">
+												<label class="outlet"> 
+											<input checked="checked" type="checkbox" data-id="{{outlet.id}}">
+												<span class="lever switch-col-{{theme}}"></span></label>
+											</div>
+											{% else %}
+											<div class="switch">
+												<label class="outlet">
+												<input type="checkbox" data-id="{{outlet.id}}">
+												<span class="lever switch-col-{{theme}}"></span></label>
+											</div>
+											{% endif %}
+										</td>
+										<td>
+										 <a href="/admin/outlets/view/{{outlet.id}}"><i class="material-icons col-{{theme}}">folder_open</i></a>
+
+										 <a href="/admin/outlets/edit/{{outlet.id}}" name="edit" value="edit"><i class="material-icons col-{{theme}}">edit</i>
+										 </a>
+
+										<a class="delete_user"  onclick="showConfirmMessage('/admin/outlets/delete/{{outlet.id}}', 'User')" name="delete" data-type="confirm" value="delete">
+											<i class="material-icons col-{{theme}}">delete</i>
+											</a>
+											
+										</td>
+									</tr>
+									
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- #END# Exportable Table -->
+	</div>
+</section>
+{% endblock %}

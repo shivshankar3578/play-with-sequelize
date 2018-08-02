@@ -1,0 +1,73 @@
+<section>
+	<!-- Left Sidebar -->
+	<aside id="leftsidebar" class="sidebar">
+		<!-- User Info -->
+		<div class="user-info bg-{{theme}}">
+			<div class="image">
+				<img src="{{user.profile_image}}" />
+			<!--	<img src="/images/user.png" width="48" height="48" alt="User" />-->
+			</div>
+			<div class="info-container">
+				<input type="hidden" id="user_type" value="{{user.userType}}"> 
+				<div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.name}} </div>
+				<div class="email" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.email}} </div>
+			</div>
+				<div class="user-helper-dropdown" style="display: inline;">
+					<i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+						<ul class="dropdown-menu pull-right" style="right: -12px">
+								<li><a href="/admin/profile"><i class="material-icons">person</i>Profile</a>
+								</li>
+								<li role="seperator" class="divider"></li>
+								<li><a href="/admin/changepassword"><i class="material-icons">lock</i>change password</a></li>
+								<li role="seperator" class="divider"></li>
+								<li><a href="/admin/logout"><i class="material-icons">input</i>Sign Out</a>
+								</li>
+						</ul>
+				</div>
+	
+		</div>
+		<!-- #User Info -->
+		<!-- Menu -->
+		<div class="menu">
+			<ul class="list" style="overflow-y:scroll">
+				<li class="active" >
+					<a href="/admin/">
+					<i class="material-icons">home</i>
+					<span> Dashboard </span>
+					</a>
+				</li>
+
+					{% for c in allowCtrls %}
+				<li {% if ctrl == c.name %} class="active" {% endif %} >
+					<a href="#" class="menu-toggle">
+					<i class="material-icons">{{c.icon}}</i>
+					<span>{{c.display}}</span>
+					</a>
+					{% if ctrl == c.name %}
+					<ul class="ml-menu" style="display: block;" >
+						{% else %}
+					<ul class="ml-menu">
+						{% endif %}
+					{% for m in c.methods %}
+						<li>
+							<a href="/admin/{{m.path}}">{{m.name}}</a>
+						</li>
+					{% endfor %}
+					</ul>
+				{% endfor %}
+				</li>
+			</ul>
+		</div>
+		<!-- Footer -->
+		<div class="legal">
+			<div class="copyright">
+				&copy; 2016 - 2017 <a href="#">TestApp App</a>.
+			</div>
+			<div class="version">
+				<b>Version: </b> 1.0.1
+			</div>
+		</div>
+		<!-- #Footer -->
+	</aside>
+
+</section>

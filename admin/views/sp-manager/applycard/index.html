@@ -1,0 +1,125 @@
+{% extends "layouts/list.html" %} {% block pagewrapper %}
+<section class="content">
+	<div class="container-fluid">
+		<!--  <a href="/pages/add" class="btn btn-success" role="button">Add</a>-->
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> TestApp: All Leads</h2>
+					<a style="float: right" model-name="applycard"  class="btn btn-danger waves-effect ajax_deleteAll"> Delete selected</a>
+					<!-- <a style="float: right" model-name="applycard"  model-status="1"  class="btn btn-success waves-effect ajax_chnageStatusAll"> Activate selected</a> -->
+					<!-- <a style="float: right" model-name="applycard"  model-status="0"  class="btn btn-warning waves-effect ajax_chnageStatusAll"> Deactivate selected</a> -->
+					</div>
+					<div class="body">
+						<div class="table-responsive">
+					<table id="datalist" class="table table-bordered table-striped table-hover dataTable js-basic-example">
+								<thead>
+									<tr>
+										<th> </th>
+										<th>S.no</th>
+										<th>User Name</th>
+										<th>Issuer Name</th>
+										<th>Card Name</th>
+										<th data-sortable="false">Status</th> 
+										<th data-sortable="false">Change status </th> 
+										<th data-sortable="false">Action</th> 
+									</tr>
+								</thead>
+								<tbody>
+									{% for applycard in applycards %}
+									<tr id="del_{{applycard.id}}">
+										<td></td>
+										<td>{{ loop.index }}</td>
+										<td>{{applycard.user.name }}</td>
+										<td>{{applycard.card.bank.bankname }}</td>
+										<td>{{applycard.card.cardname }}</td>
+										<td>	
+											 {% if applycard.status==0 %}
+											<a type="button" class="btn btn-default waves-effect"> Pending </a>
+											{% elseif applycard.status==1 %}
+											<a class="btn btn-primary waves-effect">Process</a>
+												{% elseif applycard.status==2 %}
+											<a class="btn btn-warning waves-effect">Hold</a>
+												{% elseif applycard.status==3 %}
+											<a class="btn btn-success waves-effect">Completed</a>
+												{% elseif applycard.status==4 %}
+											<a class="btn btn-danger waves-effect">Cancelled	</a>
+											{% endif %}
+									</td> 
+										<td class="lead_stat" data-id="{{applycard.id}}" data-sort="{{applycard.status}}">
+											{% if applycard.status!=3 and applycard.status!=4  and applycard.status!=1 %}
+											<a href="/admin/cards/lead_stat/?user_id={{applycard.user_id}}&card_id={{applycard.id}}&status=1" data-sort="1"  class="btn btn-primary waves-effect">Process</a>
+											{% endif %}
+
+											{% if applycard.status!=3 and applycard.status!=4  and applycard.status!=2 %}
+											<a href="/admin/cards/lead_stat/?user_id={{applycard.user_id}}&card_id={{applycard.id}}&status=2" data-sort="2"  class="btn btn-warning waves-effect">Hold</a>
+											{% endif %}
+
+											{% if applycard.status!=3 and applycard.status!=4 %}
+											<a href="/admin/cards/lead_stat/?user_id={{applycard.user_id}}&card_id={{applycard.id}}&status=3" data-sort="3"  class="btn btn-success waves-effect">Complete</a>
+											{% endif %}
+
+											{% if applycard.status!=4 and applycard.status!=3 %}
+											<a href="/admin/cards/lead_stat/?user_id={{applycard.user_id}}&card_id={{applycard.id}}&status=4" data-sort="4"  class="btn btn-danger waves-effect">Cancel	</a>
+											{% endif %}
+										<br>
+								</td>
+								<td >
+										<a href="/admin/leads/view/{{applycard.id}}"><i class="material-icons col-{{theme}}">folder_open</i></a>
+										<a model-name="applycard" data-value="{{applycard.id}}" class="ajax_delete"><i class="material-icons col-{{theme}}">delete</i></a>
+								</td>
+									</tr>
+								
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- #END# Exportable Table -->
+	</div>
+</section>
+<script type="text/javascript">
+	//  $.fn.changeStat = function() {
+	//  	var current =	$(this).data("sort")
+	//  	console.log(current)
+	// 	$(".lead_stat button").each(function() {
+	// 		var tmp =	$(this).data("sort")
+	// 	 	console.log(tmp)
+	// 		if(tmp < current) $(this).attr("disabled")
+	// 		else if(tmp == current) $(this).addClass("col-xs-12")
+	// 		// else $(this).add
+	// 	});
+	// }
+
+// $('.lead_stat').changeStat();
+
+	// $(".lead_stat button").on("click", function(){
+	//  var id = $(this).parent('td').data('id');
+	//  var status = $(this).data('sort');
+
+	// 	$.ajax({
+	// 		url: window.location.origin+"/admin/cards/lead_stat",
+	// 		data: { status : status, id : id},
+	// 		method: "POST",
+	// 		dataType:'json',
+ //    	success : function () {
+ // 			  console.log("done")
+	// 		  $('.lead_stat').attr("data-sort",status)  
+	// 		  $('.lead_stat').changeStat();
+ //    	},
+ //    	error : function (err) {
+ //    		console.log(`err`, err);
+ //    	}
+	// 	})
+ // })
+
+
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+
+			<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> Edit Reward Program</h2>
+					</div>
+					<div class="body">
+						<form id="form_validation"  method="POST" novalidate="novalidate" enctype="multipart/form-data">
+							<div class="form-group form-float">
+								<label class="form-label required">Program Name</label>
+								<div class="form-line">
+									<input class="form-control" name="program_name" type="text" value="{{rewards.program_name}}" required>
+							</div>
+							</div>
+								<div class="form-group form-float">
+								<label class="form-label required">Program Name (Arabic)</label>
+								<div class="form-line">
+									<input class="form-control" name="program_name_ar" type="text" value="{{rewards.program_name_ar}}" required>
+							</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">Description</label>
+								<div class="form-line">
+									<textarea required class="ckeditor" name="description">{{rewards.description}}</textarea>
+
+							</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">Description (Arabic)</label>
+								<div class="form-line">
+									<textarea required class="ckeditor" name="description_ar">{{rewards.description_ar}}</textarea>
+
+							</div>
+							</div>
+							<div class="form-group form-float">
+								<label class="form-label required">Reward rate </label>
+								<div class="form-line error">
+									<input class="form-control" name="reward_rate" type="number" value="{{rewards.reward_rate}}" required>
+							</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">Redeem rate</label>
+								<div class="form-line">
+									<input class="form-control"  min="0" name="redeem_rate" value="{{rewards.redeem_rate}}"  required type="number">
+							</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">Redeem mechanism </label>
+								<div class="form-line">									
+										<textarea required class="ckeditor" name="redeem_mechanism">{{rewards.redeem_mechanism}}</textarea>
+								</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">Redeem mechanism (Arabic)</label>
+								<div class="form-line">									
+										<textarea required class="ckeditor" name="redeem_mechanism_ar">{{rewards.redeem_mechanism_ar}}</textarea>
+								</div>
+							</div>
+								<div class="form-group form-float">
+									<label class="form-label required">Redemption outlets list</label>
+								<div class="form-line">
+									<select id="outlets" name="outlets_list[]" multiple="" class="form-control">	
+									{% for outlet in outlets %}
+									<option value="{{outlet.id}}">{{outlet.name}} </option>
+									{% endfor %}
+
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group form-float">
+									<label class="form-label required">Points enquires  </label>
+								<div class="form-line">
+										<input type="text" class="form-control" name="points_enquires" value="{{rewards.points_enquires}}" required/>
+								</div>
+							</div>
+								<div class="form-group form-float">
+									<label class="form-label required">Points validity </label>
+								<div class="form-line">
+										<input type="text"  id="datepicker" class="form-control date" name="points_validity"  value="{{rewards.points_validity}}" required placeholder="Ex: 30/07/2016"/>
+								</div>
+							</div>
+								<div class="form-group form-float">
+									<label class="form-label required">Which transactions earns points </label>
+								<div class="form-line">
+										<input type="text" class="form-control" name="earns_points" value="{{rewards.earns_points}}" required/>
+								</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">Which transactions earns points (Arabic) </label>
+								<div class="form-line">
+										<input type="text" class="form-control" name="earns_points_ar" value="{{rewards.earns_points_ar}}" required/>
+								</div>
+							</div>
+								<div class="form-group form-float">
+									<label class="form-label required">General Special Offers </label>
+								<div class="form-line">
+										<input type="text" class="form-control" name="special_offers" value="{{rewards.special_offers}}" required/>
+								</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">General Special Offers (Arabic) </label>
+								<div class="form-line">
+										<input type="text" class="form-control" name="special_offers_ar" value="{{rewards.special_offers_ar}}" required/>
+								</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">Total number of outlets </label>
+								<div class="form-line">
+										<input type="number" class="form-control" min ="0"name="number_of_outlets" value="{{rewards.number_of_outlets}}" required  />
+								</div>
+							</div>
+							<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+							<a href="/admin/rewards" class="btn btn-primary waves-effect">BACK</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<script src="/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script type="text/javascript">
+	var data = {{ rewards.outlets_list | dump | safe }}
+	console.log(data)
+	data.forEach(v=>{
+		$('#outlets option[value='+v+']').prop('selected', true);
+	})
+$(document).ready(function() {
+	$("#datepicker").bootstrapMaterialDatePicker({
+		weekStart : 0,	
+		minDate: new Date(),
+		time: false }).on('change', function(e, date)
+		{
+			$('#datepicker').parent('div').parent('div').find('#datepicker-error').hide();
+		});
+});
+</script>
+
+{% endblock %}

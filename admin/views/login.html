@@ -1,0 +1,48 @@
+{% extends "layouts/login.html" %}
+{% block container %}
+<div class="container-fluid">
+	<!-- Vertical Layout -->
+	<div class="row clearfix">
+		<div class="col-sm-6 col-sm-offset-3">
+			{% if error %}
+			<div class="alert alert-danger alert-dismissable">
+					<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+				 {{ error }}
+			</div>
+			{% elif success %}
+			<div class="alert alert-success alert-dismissable">
+					<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+				{{ success }}
+			</div>
+			{% endif %}
+			<div class="card">
+				<div class="body">
+					<form name="login" method="post" >
+						<label for="email_address">Email Address</label>
+						<div class="form-group">
+							<div class="form-line">
+								<input type="text" name="email" id="email_address" class="form-control" placeholder="Enter your email address">
+							</div>
+						</div>
+						<label for="password">Password</label>
+						<div class="form-group">
+							<div class="form-line">
+								<input type="password" name="password" id="password" class="form-control" placeholder="Enter your password">
+							</div>
+						</div>
+						<input type="checkbox" id="remember_me" class="filled-in">
+						<label for="remember_me">Remember Me</label>
+						<a  href="/admin/forgotpassword" style="float:right"> Forgot Password<a>
+						<br>
+						<button type="submit" class="btn btn-primary m-t-15 waves-effect">LOGIN</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+</script>	
+
+{% endblock %}

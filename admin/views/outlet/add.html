@@ -1,0 +1,143 @@
+
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+
+			<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> Add Outlet</h2>
+					</div>
+					<div class="body">
+								<form id="form_validation"  method="POST" novalidate="novalidate" enctype="multipart/form-data">
+							<div class="form-group form-float">
+								<label class="form-label required">Name</label>
+								<div class="form-line">
+									<input class="form-control" name="name" type="text" required>
+							</div>
+							</div>                             
+                            <div class="form-group form-float">
+								<label class="form-label required">Name (Arabic)</label>
+								<div class="form-line">
+									<input class="form-control" name="name_ar" type="text" required>
+							</div>
+							</div>
+
+							<div class="form-group form-float">
+									<label class="form-label required">Address</label>
+								<div class="form-line">
+								 <div id="map" class="gmap"></div>	
+							 <input id="address" name="address" type="hidden" required value="" id="address" />
+							  
+	 						<input type="hidden" name="latitude" id="latitude" placeholder="Latitude" required value="" />
+							 <input type="hidden" name="longitude" id="longitude" placeholder="Longitude" required value=""/>
+	 
+							</div>
+							</div>
+
+							<div class="form-group form-float">
+								<label class="form-label">Google map location</label>
+								<div class="form-line error">
+									<input class="form-control" name="google_map_location" type="text" value="" required id="google_map" readonly>
+								</div>
+							</div>
+
+							<!-- <div class="form-group form-float">
+									<label class="form-label">Redeem  rate for reward program</label>
+								<div class="form-line">
+									<input class="form-control" name="redeem_rate" required>
+								</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">offers for card name</label>
+								<div class="form-line">
+										<input type="text" class="form-control" name="offers_for_card" required/>
+								</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label required">offers for card name (Arabic)</label>
+								<div class="form-line">
+										<input type="text" class="form-control" name="offers_for_card_ar" required/>
+								</div>
+							</div> -->
+							
+								 <div class="row clearfix form-group form-float">
+										  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+												<label class="form-label required">Select Logo</label>
+												<input name="logo" type="file" required >
+										  </div>
+								</div>
+								
+							<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+							<a href="/admin/outlets" class="btn btn-primary waves-effect">BACK</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	  <script type="text/javascript">
+	 
+		  function initMap() {
+		  var myLatLng = {lat: 24.697252, lng: 46.723209};
+
+		  var map = new google.maps.Map(document.getElementById('map'), {
+			 zoom: 7,
+			 center: myLatLng
+		  });
+
+		  var marker = new google.maps.Marker({
+			 position: myLatLng,
+			 map: map,
+			 title: 'Location',
+			 draggable:true
+		  });
+		  
+		  var geocoder = new google.maps.Geocoder();
+	 //select the location in map using geocoder
+		  geocoder.geocode({
+				'latLng': myLatLng
+		  }, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					 if (results[0]) {
+						  var geoCodeArr = results[0]['address_components'];
+						  
+						 // alert(results[0].formatted_address)
+						  
+						  $('#address').val(results[0].formatted_address);                    
+						  $('#latitude').val(marker.getPosition().lat());
+						  $('#longitude').val(marker.getPosition().lng());
+						  $('#google_map').val(results[0].formatted_address);
+						  
+					 }
+				}
+		  });
+		  //we select the location on map 
+		  google.maps.event.addListener(marker, 'dragend', function() {
+					 geocoder.geocode({
+						  'latLng': marker.getPosition()
+					 }, function(results, status) {
+						  if (status == google.maps.GeocoderStatus.OK) {
+								if (results[0]) {
+									 var geoCodeArr = results[0]['address_components'];
+									 
+									 //alert(results[0].formatted_address)
+									 
+									 $('#address').val(results[0].formatted_address);                          
+									 $('#latitude').val(marker.getPosition().lat());
+									 $('#longitude').val(marker.getPosition().lng());
+									 $('#google_map').val(results[0].formatted_address);
+									 
+								}
+						  }
+					 });
+				});
+		  
+		  
+		}
+		  
+	 </script>
+	 <script async defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDieZ7uAY4DPdT3Z4fp4KtykHl6dWryYdw&callback=initMap">
+	 </script>
+{% endblock %}

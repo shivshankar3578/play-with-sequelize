@@ -1,0 +1,57 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+		<!-- Exportable Table -->
+		<div class="row clearfix"> 
+			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+				<div class="card"> 
+					<div class="header"> 
+						<h2> View Outlet  </h2>
+					 </div>
+				<div>
+
+				<div class="body"> 
+					<div class="row form-group"> 
+						<div class="col-sm-12">  
+							<label class="col-sm-4"> Name </label>
+							<span> {{outlets.name}}<span>
+						 </div>
+						 <div class="col-sm-12">  
+							<label class="col-sm-4"> Address </label>
+								<span> {{outlets.address}}<span>
+						 </div>
+						 <div class="col-sm-12">  
+							<label class="col-sm-4"> latitude </label>
+								<span> {{outlets.latitude}}<span>
+						 </div>
+						 <div class="col-sm-12">  
+							<label class="col-sm-4"> longitude </label>
+								<span> {{outlets.longitude}}<span>
+						 </div>
+						<div class="col-sm-12">  
+							<label class="col-sm-4"> Redeem rate for reward program </label>
+								<span> {{outlets.redeem_rate}}<span>
+						 </div>						 
+						 <div class="col-sm-12">  
+							<label class="col-sm-4"> Offers for card name </label>
+								<span> {{outlets.offers_for_card}}<span>
+						 </div>
+						  <div class="col-sm-12">  
+							<label class="col-sm-4">Created On </label>
+								<span> {{outlets.created_at}}<span>
+						 </div>
+
+						 <div class="col-sm-12">  
+							<label class="col-sm-4"> Logo </label>
+								<span> 
+								<img src="{{outlets.logo}}" alt="Logo" width="100" height="100">
+								<span>
+						 </div>	
+						 					 
+					 </div>
+				 </div>
+
+			 </div>
+		 </div>
+	 </div>
+{% endblock %}

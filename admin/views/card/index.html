@@ -1,0 +1,93 @@
+{% extends "layouts/list.html" %} {% block pagewrapper %}
+<section class="content">
+	 <div class="container-fluid">
+			<!-- Exportable Table -->
+			<div class="row clearfix">
+				 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="card">
+							 <div class="header">
+									<h2>TestApp: All Cards  </h2>
+									<a style="float: right" model-name="card"  class="btn btn-danger waves-effect ajax_deleteAll"> Delete selected</a>
+									<a style="float: right" model-name="card"  model-status="1"  class="btn btn-success waves-effect ajax_chnageStatusAll"> Activate selected</a>
+									<a style="float: right" model-name="card"  model-status="0"  class="btn btn-warning waves-effect ajax_chnageStatusAll"> Deactivate selected</a>
+							 </div>
+							 <div class="body">
+									<div class="table-responsive">
+										 	<table id="datalist" class="table table-bordered table-striped table-hover dataTable js-basic-example">
+												<thead>
+													 <tr>
+													 	<th> </th>
+															<th>S.No </th>
+															<th>Cardname</th>
+															<th>Issuer Name</th>
+															<th>Networks</th>
+															<!-- <th>Minimum Interest</th>
+															<th>Penalty</th> -->
+															<!-- <th>Published by</th> -->
+															<th data-sortable="false"> Updated By </th>
+															<th>Published</th>
+															<th data-sortable="false">Status</th>
+															<th data-sortable="false">Action</th>
+													 </tr>
+												</thead>
+												<tbody>
+													 {% for card in cards %}
+													 	<tr id="del_{{card.id}}">
+															<td></td>
+															<td>{{ loop.index }}</td>
+															<td>{{ card.cardname }}</td>
+															<td>{{card.bank.bankname}}</td>
+															<td>{{ card.network }}</td>
+															<!-- <td>{{ card.min_intrest }}</td>
+															<td>{{ card.penalty }}</td> -->
+															<!-- <td>{{ card.user.name }}</td> -->
+															<td>{{ card.updatedBy.name }}</td>
+															<td data-sort="{{card.is_published}}">
+																 {% if card.is_published==1 %}
+																 <div class="switch">
+																		<label class="spcard_stat">
+																		<input checked="checked" type="checkbox" data-id="{{card.id}}">
+																		<span class="lever switch-col-{{theme}}"></span></label>
+																 </div>
+																 {% else %}
+																 <div class="switch">
+																		<label class="spcard_stat">
+																		<input type="checkbox" data-id="{{card.id}}">
+																		<span class="lever switch-col-{{theme}}"></span></label>
+																 </div>
+																 {% endif %}
+															</td>
+															<td data-sort="{{card.status}}">
+																 {% if card.status==1 %}
+																 <div class="switch">
+																		<label class="card_stat">
+																		<input checked="checked" type="checkbox" data-id="{{card.id}}">
+																		<span class="lever switch-col-{{theme}}"></span></label>
+																 </div>
+																 {% else %}
+																 <div class="switch">
+																		<label class="card_stat">
+																		<input type="checkbox" data-id="{{card.id}}">
+																		<span class="lever switch-col-{{theme}}"></span></label>
+																 </div>
+																 {% endif %}
+															</td>
+															<td>
+																	<a href="/admin/cards/view/{{card.id}}" ><i class="material-icons col-{{theme}}">folder_open</i></a>
+																<a href="/admin/cards/edit/{{card.id}}" name="edit" value="edit"><i class="material-icons col-{{theme}}">edit</i></a>
+																		<a model-name="card" data-value="{{card.id}}" class="ajax_delete"><i class="material-icons col-{{theme}}">delete</i></a>
+															</td>
+													 </tr>
+													
+													 {% endfor %}
+												</tbody>
+										 </table>
+									</div>
+							 </div>
+						</div>
+				 </div>
+			</div>
+			<!-- #END# Exportable Table -->
+	 </div>
+</section>
+{% endblock %}

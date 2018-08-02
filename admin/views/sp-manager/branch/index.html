@@ -1,0 +1,65 @@
+{% extends "layouts/list.html" %} {% block pagewrapper %}
+<section class="content">
+	<div class="container-fluid">
+		<!--  <a href="/pages/add" class="btn btn-success" role="button">Add</a>-->
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> TestApp: All Branch  </h2>
+						<a style="float: right" model-name="branch"  class="btn btn-danger waves-effect ajax_deleteAll"> Delete selected</a>
+						<a style="float: right" model-name="branch"  model-status="1"  class="btn btn-success waves-effect ajax_chnageStatusAll"> Activate selected</a>
+						<a style="float: right" model-name="branch"  model-status="0"  class="btn btn-warning waves-effect ajax_chnageStatusAll"> Deactivate selected</a>
+					</div>
+					<div class="body">
+						<div class="table-responsive">
+							<table id="datalist"  class="table table-bordered table-striped table-hover dataTable js-basic-example">
+								<thead>
+									<tr>
+										<th> </th>
+										<th>S.no</th>
+										<th>Name</th>
+										<th>Address</th>
+										<th>Contact</th>
+										<th>Issuer Name</th>
+										<th data-sortable="false">Status</th>
+										<th data-sortable="false">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for branch in branches %}
+									<tr id="del_{{branch.id}}">
+										<td></td>
+										<td>{{ loop.index }}</td>
+										<td>{{branch.name }}</td>
+										<td>{{branch.address}}</td>
+										<td>{{branch.contact }}</td>
+										<td>{{branch.bank.bankname }}</td>
+										<td>
+										 {% if branch.status==1 %}
+										  <a class="btn btn-success waves-effect">Activated </a>
+										 {% else %}
+										<a class="btn btn-primary waves-effect">Not Activated</a>
+										 {% endif %}
+										</td>
+										<td>
+												<a href="/admin/branches/view/{{branch.id}}" ><i class="material-icons col-{{theme}}">folder_open</i></a>
+
+												<a href="/admin/branches/edit/{{branch.id}}" name="edit" value="edit"><i class="material-icons col-{{theme}}">edit</i></a>
+												
+										</td>
+									</tr>
+								
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- #END# Exportable Table -->
+	</div>
+</section>
+{% endblock %}

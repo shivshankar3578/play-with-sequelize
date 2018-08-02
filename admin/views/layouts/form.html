@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+		<head>
+				<meta charset="UTF-8">
+				<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+				<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+				<title>TestApp Admin Portal </title>
+				<!-- Favicon-->
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+				<!-- Google Fonts -->
+				<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+				<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+				<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+	
+
+				<!-- Jquery Core Js -->
+				<script src="/plugins/jquery/jquery.min.js"></script>
+				<script src="/js/city.js"></script>
+				<!-- Bootstrap Core Css -->
+				<link href="/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+				<link href="/plugins/node-waves/waves.css" rel="stylesheet" />
+
+				<link href="/plugins/dropzone/dropzone.css" rel="stylesheet">
+				<link href="/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+
+				<link href="/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+				<!-- Animation Css -->
+				<link href="/plugins/animate-css/animate.css" rel="stylesheet" />
+				<link href="/plugins/jquery-steps/jquery.steps.css" rel="stylesheet" />
+				<!-- Sweet Alert Css -->
+				<!--<link href="/plugins/sweetalert/sweetalert.css" rel="stylesheet" />-->
+				<script src="/js/moment/moment.js"></script>
+				<!-- Custom Css -->
+				<link href="/css/style.css" rel="stylesheet">
+				<!-- Multi Select Plugin Js -->
+				<script src="/plugins/multi-select/js/jquery.multi-select.js"></script>
+
+				<!-- Multi Select Css -->
+				<link href="/plugins/multi-select/css/multi-select.css" rel="stylesheet">
+				
+				<link href="/css/custom.css" rel="stylesheet">
+				<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+				<link href="/css/themes/all-themes.css" rel="stylesheet" />
+				<style>
+				.wizard .content{
+					height: 100%
+				}
+				input { padding-left: 5px}
+				.form-label{ text-align: right;}
+				.form-label.required:after{
+				color: red;
+				content: " * ";
+				}
+			.wizard > .content > .body label{ padding-top: 5px}
+			.input-group { margin-bottom: 0; width: auto;}
+			</style>
+
+		</head>
+
+		<body class="theme-{{theme}} ls-closed">
+				<!-- Page Loader -->
+				<div class="page-loader-wrapper">
+						<div class="loader">
+								<div class="preloader">
+										<div class="spinner-layer pl-{{theme}}">
+												<div class="circle-clipper left">
+														<div class="circle"></div>
+												</div>
+												<div class="circle-clipper right">
+														<div class="circle"></div>
+												</div>
+										</div>
+								</div>
+								<p>Please wait...</p>
+						</div>
+				</div>
+				<!-- #END# Page Loader -->
+				<!-- Overlay For Sidebars -->
+				<div class="overlay"></div>
+				<!-- #END# Overlay For Sidebars -->
+				<!-- Search Bar -->
+				<div class="search-bar">
+						<div class="search-icon">
+								<i class="material-icons">search</i>
+						</div>
+						<input type="text" placeholder="START TYPING...">
+						<div class="close-search">
+								<i class="material-icons">close</i>
+						</div>
+				</div>
+				<!-- #END# Search Bar -->
+				<!-- Top Bar -->
+				<!-- {% include "../partials/topbar.html" %}-->
+				<!-- #Top Bar -->
+
+				<!-- Left Navigation Bar -->
+				<!-- {% include "../partials/navigation.html" %}-->
+				<!-- #Left Navigation Bar -->
+				<section class="content">
+					<div class="container-fluid">
+								{% if error %}
+								<div class="alert alert-danger alert-dismissable">
+										<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+									 {{ error }}
+								</div>
+								{% elif success %}
+								<div class="alert alert-success alert-dismissable">
+										<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+									{{ success }}
+								</div>
+								{% endif %}
+						{% block pagewrapper %}{% endblock %}
+				</div>
+			</section>
+
+
+				<!-- Bootstrap Core Js -->
+				<script src="/plugins/bootstrap/js/bootstrap.js"></script>
+
+				<!-- Select Plugin Js -->
+				<script src="/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+				<script src="/plugins/dropzone/dropzone.js"></script>
+
+				<!-- Slimscroll Plugin Js -->
+				<script src="/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+				<!-- Jquery Validation Plugin Css -->
+				<script src="/plugins/jquery-validation/jquery.validate.js"></script>
+
+
+				<script src="/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+				<!-- JQuery Steps Plugin Js -->
+				<script src="/plugins/jquery-steps/jquery.steps.js"></script>
+
+				<!-- Sweet Alert Plugin Js -->
+			<!--	<script src="/plugins/sweetalert/sweetalert.min.js"></script>
+ Waves Effect Plugin Js -->
+				<script src="/plugins/node-waves/waves.js"></script>
+				<!-- Custom Js -->
+
+				<script src="/js/form-wizard.js"></script>
+
+				<script src="/js/admin.js"></script>
+
+				<script src="/js/pages/forms/form-validation.js"></script>
+
+				<script src="/js/pages/forms/advanced-form-elements.js"></script>
+				<script src="/plugins/ckeditor/ckeditor.js"></script>
+				<script src="/js/pages/forms/editors.js"></script
+				<!-- Demo Js -->
+				<script src="/js/demo.js"></script>
+				<!-- GMaps PLugin Js -->
+    <script src="/plugins/gmaps/gmaps.js"></script>
+	
+
+		</body>
+
+</html>

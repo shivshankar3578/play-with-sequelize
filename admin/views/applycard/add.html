@@ -1,0 +1,108 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> Add Enquiry </h2>
+					</div>
+					<div class="body">
+						<form id="form_validation"  method="POST" novalidate="novalidate" enctype="multipart/form-data">
+							<!-- <div class="form-group form-float">
+								<div class="form-line">
+								    <input class="form-control" name="name" type="text" required>
+								    <label class="form-label">Name</label>
+								</div>
+								</div>-->
+						<div class="form-group form-float">
+								<label class="form-label required">Companey Name</label>
+								<div class="form-line">
+									<input  class="form-control" name="company_name" required  type="text">
+								</div>
+							</div>
+						<div class="form-group form-float">
+								<label class="form-label required">Employment Type</label>
+								<div class="form-line">
+									<input  class="form-control" name="employment_type" required  type="text">
+								</div>
+							</div>
+							<div class="form-group form-float">
+								<label class="form-label required">Month Salary</label>
+								<div class="form-line">
+									<input  class="form-control" name="month_salary" required officer type="text" step="any" min="1000" max="10000000000">
+								</div>
+							</div>
+							<!-- 	<div class="form-group form-float">
+								<label class="form-label required">Age</label>
+								<div class="form-line">
+									<input  class="form-control" name="age" required  type="text">
+								</div>
+							</div> -->
+							<div class="form-group form-float">
+									<label class="form-label required">DOB</label>
+								<div class="form-line">
+										<input type="text" id="datepicker"  class="form-control date" name="date_of_birth" required/>
+								</div>
+							</div>
+								<div class="form-group form-float">
+								<label class="form-label required">Name</label>
+								<div class="form-line">
+									<input  class="form-control" name="name" required  type="text">
+								</div>
+							</div>
+								<div class="form-group form-float">
+								<label class="form-label required">Mobile No</label>
+								<div class="form-line">
+									<input  class="form-control" name="mobile" min="10" max="11" required  type="number">
+								</div> 
+							</div>
+								<div class="form-group form-float">
+								<label class="form-label required">Email</label>
+								<div class="form-line">
+									<input  class="form-control" name="email" required  type="email">
+								</div>
+							</div>
+							<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+							<a href="/admin/enquiry" class="btn btn-primary waves-effect">BACK</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- <script>$(document).ready(function () {
+	$('input[type=file]').change(function () {
+		var val = $(this).val().toLowerCase();
+		var regex = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+		if(!(regex.test(val))) {
+			$(this).val('');
+			alert("Please select correct file format")
+		}
+		});
+	});
+</script> -->
+<script src="/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#datepicker").bootstrapMaterialDatePicker({
+		weekStart : 0,
+		minDate:"1970-01-01",
+		maxDate: new Date(),
+		time: false }).on('change', function(e, date)
+		{
+			$('#datepicker').parent('div').parent('div').find('#datepicker-error').hide();
+		});
+});
+</script>
+<script type="text/javascript">
+function isNumberKey(evt){
+	//alert("hi");
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    //alert("code",charCode);
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+
+</script>
+{% endblock %}

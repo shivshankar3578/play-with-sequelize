@@ -1,0 +1,41 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+		<!-- Exportable Table -->
+		<div class="row clearfix"> 
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+				<div class="card"> 
+					<div class="header"> 
+						<h2> View Page  </h2>
+					 </div>
+				<div>
+				<div class="body"> 
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Page </label>
+							<span> {{page.title}}<span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Body</label>
+								<span> {{page.body}}<span>
+						 </div>
+					 </div>
+					 
+					 
+
+			<!--		<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">  Address </label>
+							<span> {{users.address}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Gender </label>
+							<span> {{users.gender}} <span>
+						 </div>
+					 </div>-->
+
+
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+{% endblock %}

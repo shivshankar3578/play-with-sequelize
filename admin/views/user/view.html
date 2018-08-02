@@ -1,0 +1,134 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+		<div class="row clearfix">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<div class="card">
+		<div class="header">
+			<h2> View Users  </h2>
+		</div>
+		<div>
+			<div class="body">
+				<div class="row form-group">
+					<div class="col-sm-6">  
+						<label class="col-sm-4"> Name </label>
+						<span> {{users.name}} <span>
+					</div>
+					<div class="col-sm-6">  
+						<label class="col-sm-4">  Dob  </label>
+						<span> {{users.date_of_birth}}<span>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-sm-6">  
+						<label class="col-sm-4"> Email </label>
+						<span> {{users.email}} <span>
+					</div>
+					<div class="col-sm-6">  
+						<label class="col-sm-4"> Gender </label>
+						{%if users.gender == 1 %}
+						Male
+						{% elseif users.gender == 2 %}
+						Female
+						{%  else %}
+						Other
+						{% endif %}
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-sm-6">  
+						<label class="col-sm-4">  Address </label>
+						<span> {{users.address}} <span>
+					</div>
+					<div class="col-sm-6">  
+						<label class="col-sm-4"> Image </label>
+						<span>	<img src="{{users.profile_image}}" width="100"> <span>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-sm-6">  
+						<label class="col-sm-4">  Marital status </label>
+						<span> {{users.marital_status}} <span>
+					</div>
+					<div class="col-sm-6">  
+						<label class="col-sm-4"> Last qualification </label>
+						<span>	{{users. last_qualification}}" <span>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-sm-6">  
+						<label class="col-sm-4">Residence </label>
+						<span> {{users.residence}} <span>
+					</div>
+					<div class="col-sm-6">  
+						<label class="col-sm-4">Employment </label>
+						<span>	{{users.employment}} <span>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-sm-6">  
+						<label class="col-sm-4"> Salary account </label>
+						<span> {{users.salary_account}} <span>
+					</div>
+					<div class="col-sm-6">  
+						<label class="col-sm-4"> Work experience </label>
+						<span>	<img src="{{users.work_exp}}" width="100"> <span>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-sm-6">  
+						<label class="col-sm-4"> pan No </label>
+						<span> {{users.pan_no}} <span>
+					</div>
+					<div class="col-sm-6">  
+						<label class="col-sm-4"> 	Date of Registation </label>
+						<span>	{{users.created_at}}  <span>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <div class="row clearfix">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	    <div class="card">
+	    			<div class="header"> 
+								<h2> View Cards  </h2>
+								<a href="/admin/cards" class="btn bg-red waves-effect" style="float:right">View Card</a>
+				</div>
+	
+	         <div class="body">
+	            <table id="mainTable" class="table table-striped">
+	                <thead>
+	                    <tr>
+	                        <th>S.no</th>
+	                        <th>Cardname</th>
+	                        <th>Brand</th>
+	                        <th>Minimum Interest</th>
+	                        <th>Penalty</th>
+	                        <th>Cash advance</th>
+	                        <th>Issuer Name</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                		 {% for card in users %}
+	                 				<td>{{ loop.index }}		</td>                       					      			
+	                 					<td>{{ card.cardname }}</td>  
+	                 					<td>{{ card.brand }}</td>  
+	                  				<td>{{ card.min_intrest }}</td>  
+	                						<td>{{ card.penalty }}</td>  
+	                   			<td>{{ card.cash_adv }}</td>  
+	                   			<td>{{ card.bank.bankname }}</td>  
+	                </tbody>
+	              	 {% endfor %}
+	
+	            </table>
+	        </div>
+	    </div>
+	</div>
+	</div> -->
+{% endblock %}
+
+

@@ -1,0 +1,159 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+		<!-- Exportable Table -->
+		<div class="row clearfix"> 
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+				<div class="card"> 
+					<div class="header"> 
+						<h2> View Apply Card Manager  </h2>
+					 </div>
+				<div>
+				<div class="body"> 
+
+					 <div class="row form-group"> 
+							<div class="col-sm-6">  
+								<label class="col-sm-4"> User Name </label>
+								<span>{{applycard.user.name}} <span>
+							 </div>
+							 <div class="col-sm-6">  
+								<label class="col-sm-4"> Applied On </label>
+								<span>{{applycard.created_at }} <span>
+							 </div>
+					</div>
+						
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	Designation </label>
+							<span> {{applycard.designation}} </span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	Office name </label>
+							<span> {{applycard.	office_name}} </span>
+						 </div>
+					 </div>
+					 
+					 
+				<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">  Office address </label>
+							<span>{{applycard.office_address}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	Mobile </label>
+							<span> {{applycard.	mobile}}<span>
+						 </div>
+					 </div>
+
+					 <div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	Office pan no </label>
+							<span>{{applycard.	office_pan_no}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	Subscription </label>
+							<span> {{applycard.	subscription}}<span>
+						 </div>
+					 </div>
+
+						<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	First name </label>
+							<span>{{applycard.first_name}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	Last name </label>
+							<span> {{applycard.last_name}}<span>
+						 </div>
+					 </div>
+					
+						<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Gender </label>
+							<span>{{applycard.gender}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	Email </label>
+							<span> {{applycard.email}}<span>
+						 </div>
+					 </div>
+
+						<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	Last qualification </label>
+							<span>{{applycard.last_qualification}} <span>
+						 </div>
+						 <div class="col-sm-6">  
+							<label class="col-sm-4"> 	House number </label>
+							<span> {{applycard.house_number}}<span>
+						 </div>
+						 </div>
+
+						<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">	City name  </label>
+							<span>{{applycard.city_name}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 	Pin code </label>
+							<span> {{applycard.pin_code}}<span>
+						 </div>
+					 </div>
+
+						<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> State </label>
+							<span>{{applycard.state}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Pan no  </label>
+							<span> {{applycard.pan_no}}<span>
+						 </div>
+					 </div>
+
+										
+					 <div class="row form-group"> 
+							<div class="col-sm-6">  
+								<label class="col-sm-4"> Bank Name </label>
+								<span>{{applycard.card.bank.bankname }} <span>
+							 </div>
+							 <div class="col-sm-6">  
+								<label class="col-sm-4"> Card Name  </label>
+								<span> {{applycard.card.cardname}}<span>
+							 </div>
+					 </div>
+				
+
+					 <div class="row form-group"> 
+							{% if applycard.process_date %}
+							<div class="col-sm-6">  
+								<label class="col-sm-4"> Process Date </label>
+								<span>{{applycard.process_date }} <span>
+							 </div>
+							 {% endif %}
+							 {% if applycard.hold_date %}
+							 <div class="col-sm-6">  
+								<label class="col-sm-4"> Hold Date  </label>
+								<span> {{applycard.hold_date}}<span>
+							 </div>
+							 {% endif %}
+					 </div>
+
+					  <div class="row form-group"> 
+					 		{% if applycard.complete_date %}
+					 		<div class="col-sm-6">  
+					 			<label class="col-sm-4"> Complete Date </label>
+					 			<span>{{applycard.complete_date }} <span>
+					 		 </div>
+					 		 {% endif %}
+					 		 {% if applycard.cancel_date %}
+					 		 <div class="col-sm-6">  
+					 			<label class="col-sm-4"> Cancel Date  </label>
+					 			<span> {{applycard.cancel_date}}<span>
+					 		 </div>
+					 		 {% endif %}
+					  </div>
+
+				 </div>
+		 </div>
+	 </div>
+{% endblock %}

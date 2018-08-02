@@ -1,0 +1,771 @@
+{% extends "layouts/form.html" %} {% block pagewrapper %}
+<!-- Exportable Table -->
+<div class="row clearfix">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="card">
+			<div class="header">
+				<h2> Add Card </h2>
+			</div>
+			<div class="body">
+				<form id="wizard_with_validation" method="POST" class="submit_form" enctype="multipart/form-data">
+					<h3> General Info. </h3>
+					<fieldset>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Issuer Name</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<select name="bank_id" required class="form-control">
+										{% if user.bank %}
+											<option value="{{ user.bank.id }}"> {{user.bank.bankname}} </option>
+										{% else %}>	
+										{% for bank in banks %}
+											<option value="{{ bank.id }}"> {{bank.bankname}} </option>
+										{% endfor %}
+									{% endif %}>
+									</select>
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+
+
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Rewards</label> 
+							<div class="input-group">
+								<span class="input-group-addon"> <i class="material-icons"></i> </span> 
+								<div class="form-line">
+									<select name="reward_list[]" multiple="" class="form-control">
+										{% for reward in rewards %} 
+										<option value="{{ reward.id }}"> {{reward.program_name}} </option>
+										{% endfor %} 
+									</select>
+								</div>
+								<span class="input-group-addon"> <i class="material-icons"></i> </span> 
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+
+
+						
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Card Name</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="text" class="form-control" required name="cardname" >
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+                       	<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Card Name (Arabic)</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="text" class="form-control" required name="cardname_ar" >
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Annual Fee</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="">
+									<select id="annualfee" name="annualfee" required style="width: 49.98%" class="form-control">
+									<!-- <option value="" disabled selected=""> Select a value </option> -->
+									<option value="0">Free for life</option>
+									<option value="1">Free (first year) then</option>
+									<option value="2"> Pay </option>
+									</select>
+									<input  id="_annualfee"   style="width: 49.98%; display: none;" value=""  type="number" step="any" min="1" max="10000000000" name="_annualfee"  class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Service Type</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<select name="servicetype" required class="form-control">
+									{% for keyval in defaults.serviceType %}
+									<option value="{{keyval.id }}">{{keyval.name }}</option>
+									{% endfor %}
+									</select>
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Targeted Users</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<select id="targeted_users" required name="targeted_users"  class="form-control">
+										{% for keyval in defaults.targetedUsers %}
+										<option value="{{ keyval.id }}">{{ keyval.name}}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+
+
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Credit Needed</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line error">
+									<input type="text" required class="form-control" name="credit_needed"  minlength="2"  maxlength="15">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Card Background <br>  ( size: 1024×640 px)</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class=" error">
+									<input name="cardback" type="file" required >
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Card Front Image <br>  ( size: 1024×640 px)</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class=" error">
+									<input name="frontimage" type="file" required >
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						
+						 
+					</fieldset>
+					<h3>Card Fees</h3>
+					<fieldset>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Late Payment Fee</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required officer value="" type="number" step="any" min="0" max="10000000000" name="late_payment"  class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Forign Transaction Fee</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="number" step="any" min="0" max="10000000000" name="forgin_tran"  class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Balance Transfer Fee</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required officer value="" type="number" step="any" min="0" max="10000000000" name="balance_trans" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Returend Payment Fee</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="number" step="any" min="0" max="10000000000"  name="returned_pay" class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Penalty APR</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="number" step="any" min="0" max="10000000000" name="penalty" class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Minimum Interest Charge</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input require  value="" type="number" step="any" min="0" max="100" name="min_intrest" d class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Cash Advance Fee</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="number" step="any" min="0" max="10000000000" name="cash_adv"  class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Yearly Insurance Fee </label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="number" step="any" min="0" max="10000000000" name="yearly_fee" class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Yearly Insurance Fee for additional cards </label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="number" step="any" min="0" max="10000000000"  name="yearly_add"  class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Re-insurance fee </label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="number" step="any" min="0" max="10000000000" name="reissuance"  class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Add on card </label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<!--	<input value="" type="number" name="add_card" class="form-control">-->
+									<!--	<input type="number" name="add_card" class="form-control">-->
+									<select name="add_card" required class="form-control">
+										{% for keyval in defaults.addonCard %}
+										<option value="{{ keyval.id }}">{{ keyval.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Minimum Monthly Part payment </label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="number" step="any" min="0" max="10000000000" name="minimum_monthly" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Monthly interest</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="text" name="monthly_intrest" class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Monthly Subscription Fee </label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="number" step="any" min="0" max="10000000000"  name="monthly_subscription"  class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+					</fieldset>
+					<h3>Ongoing Information</h3>
+					<fieldset>
+
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Grace Period</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="text" name="grace_period" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Regular Purchase APR</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value=""  type="number" step="any" min="0" max="10000000000" name="regular_purchase" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Intro Purchase APR</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="number" step="any" min="0" max="10000000000" name="intro_purchase" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Intro BT APR</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="number" step="any" min="0" max="10000000000" name="intro_bt" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Maximum Possible Cash withdrawal of Credit Limit</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="number" step="any" min="0" max="10000000000" name="maximum_cash" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Maximum Credit Limit SAR</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="number" step="any" min="0" max="10000000000" name="maximum_credit" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+					</fieldset>
+					<h3>Additional Info.</h3>
+					<fieldset>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Signup Bonus</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input required  value="" type="number" step="any" min="0" max="10000000000" name="signup_bonus"  class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Payment weaver in case of death</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="">
+									<input name="payment_death" type="radio" id="radio_1"
+									 value="1"/>
+									<label for="radio_1">Yes</label>
+									<input name="payment_death" type="radio" id="radio_2"
+									value="0"  />
+									<label for="radio_2">No</label>
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Remittance Services</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="">
+									<!--<label for="No">No</label>-->
+									<input name="remittance_services" id="radio_3" type="radio"
+									 value="1" />
+									<label for="radio_3">Yes</label>
+									<input name="remittance_services" id="radio_4" type="radio"     value="0" />
+									<label for="radio_4">No</label>
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">24x7 Telephonic Assistance</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="">
+									<!--<label for="No">No</label>-->
+									<input name="telephonic_ass" id="radio_5" type="radio"
+									  value="1" />
+									<label for="radio_5">Yes</label>
+									<input name="telephonic_ass" id="radio_6" type="radio"
+									  value="0"/>
+									<label for="radio_6">No</label>
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Protection Services</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="text" name="protection_services" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Travel Insurance</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="number" step="any" min="0" max="10000000000"name="travel_insurance" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Airport Lounge Access</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="text" name="airport_lounge" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Emergency Cash</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value=""  type="number" step="any" min="0" max="10000000000" name="emergency_cash" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Extended Waranty</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<input value="" type="text" name="extended_waranty" required class="form-control">
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Card Category</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<select required name="card_category" class=" form-control">
+										{% for keyval in defaults.cardCategory %}
+										<option value="{{ keyval.id }}">{{ keyval.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+						<div class="row form-group form-float">
+							<label class="col-sm-3 form-label required">Networks</label>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+								<div class="form-line">
+									<select required name="network" class="form-control">
+										{% for keyval in defaults.network %}
+										<option value="{{ keyval.id }}">{{ keyval.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<span class="input-group-addon">
+								<i class="material-icons"></i>
+								</span>
+							</div>
+							<div class="col-sm-3"> </div>
+						</div>
+					</fieldset>
+					<!-- <input type="hidden" name="id" value="" />	 -->
+				</form>
+				<!--		<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+					<a href="/admin/bank" class="btn btn-primary waves-effect">BACK</a>-->
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	 $(document).on('change','#annualfee',function(){
+		var selectedID = $("#annualfee option:selected").val()
+	console.log(selectedID)
+		if(selectedID==0) return  $("#_annualfee").hide()
+		 $("#_annualfee").show()
+		 $("#_annualfee").val('')
+	})
+
+	var _URL = window.URL || window.webkitURL;
+	function isGoodImage(file) {
+			console.log(`here`);
+			var deferred = jQuery.Deferred();
+			var image = new Image();
+			
+			image.onload = function() {
+					// Check the image resolution
+					if(this.width >= 1024 && this.height >= 640 && this.width/this.height === 1.6) 
+							deferred.resolve(true);
+					 else 
+							deferred.resolve(false);
+			};
+			
+			image.onerror = function() {
+					deferred.resolve(false);
+			}
+			image.src = _URL.createObjectURL(file);
+			
+			return deferred.promise();
+	}
+	// $(document).ready(function () {
+
+	$(document).on('change','input[type=file]', function () {
+		console.log(`clled`);
+		var self = this
+		var val = $(this).val().toLowerCase();
+		var regex = new RegExp("(.*?)\.(png|jpg|jpeg)$");
+
+		isGoodImage(this.files[0]).
+		then(function(isGood) {
+			if(!(regex.test(val))) {
+				$(self).val('');
+				alert("Please select correct file format")
+			}
+			else if(!isGood) {
+				$(self).val('');
+				alert("Please select correct file size")
+			}
+			else{
+				$(self).parent().find('label.error').remove()
+			}
+		})
+		
+		});
+	// });
+</script>
+
+{% endblock %}

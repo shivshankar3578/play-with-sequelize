@@ -1,0 +1,70 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+		<!-- Exportable Table -->
+
+
+
+
+
+		<div class="row clearfix"> 
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+				<div class="card"> 
+					<div class="header"> 
+						<h2> View Branch  </h2>
+					 </div>
+				<div>
+				<div class="body"> 
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Name </label>
+							<span> {{branch.name }} <span>
+                
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Name (Arabic) </label>
+								<span> {{branch.name_ar}}<span>
+						 </div>
+					 </div>
+					 
+					 
+					 	<div class="row form-group"> 
+							<div class="col-sm-6">  
+								<label class="col-sm-4">Telephone No</label>
+									<span> {{branch.telephone}}<span>
+							 </div>
+
+							<div class="col-sm-6">  
+								<label class="col-sm-4"> Google Map Address </label>
+									<span> {{branch.address}}<span>
+							</div>
+					 </div>
+					  
+					  	<div class="row form-group"> 
+					 		<div class="col-sm-6">  
+					 			<label class="col-sm-4">Telephone No</label>
+					 			<img src="{{branch.logo}}" alt="Logo" width="100" height="100">
+					 		 </div>
+
+					 		<div class="col-sm-6">  
+					 			
+					 		</div>
+					  </div>
+
+
+
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Contact </label>
+							<span> {{branch.contact}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Issuer Name</label>
+							<span>{{branch.bank.bankname}} <span>
+						 </div>
+					 </div>
+					
+				 </div>
+			 </div>
+		 </div>
+	 </div>
+{% endblock %}

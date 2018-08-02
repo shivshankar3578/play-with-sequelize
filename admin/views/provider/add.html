@@ -1,0 +1,81 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> Add Product Manager </h2>
+					</div>
+					<div class="body">
+						<form id="form_validation"  method="POST" novalidate="novalidate" enctype="multipart/form-data">
+							<div class="form-group form-float">
+									<label class="form-label required">Name</label>
+								<div class="form-line">
+									<input class="form-control" name="name" type="text" required>
+								</div>
+							</div>
+							
+
+							<div class="form-group form-float">
+								<label class="form-label required">Bank Name</label>
+								<div class="form-line">
+									<select name="bank_id" required id="banks" class="form-control">
+										<!-- <option value="" disabled selected=""> Select a value </option> -->
+										{% if user.bank %}
+											<option value="{{ user.bank.id }}"> {{user.bank.bankname}} </option>
+										{% else %}>	
+										{% for bank in banks %}
+										<option value="{{ bank.id }}"> {{bank.bankname}} </option>
+										{% endfor %}
+									{% endif %}>
+									</select>
+							</div>
+							</div>
+
+	 						<!--<div class="form-group form-float">
+								<label class="form-label required">Branch Name</label>
+								<div class="form-line">
+									<select name="branch_id" required id="branches" class="form-control">
+									</select>
+							</div>
+							</div> -->
+
+
+							<div class="form-group form-float">
+									<label class="form-label required">Email</label>
+								<div class="form-line">
+									<input class="form-control" name="email" type="email" required="">
+								</div>
+							</div>
+							<div class="form-group form-float">
+									<label class="form-label">Password</label>
+								<div class="form-line">
+									<input class="form-control" name="password" type="password" required minlength="8"  maxlength="15">
+								</div>
+							</div>
+							<input type="hidden" name="allvalues" id="allvalues" value="{{branches}}">
+							<button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
+							<a href="/admin/providers" class="btn btn-primary waves-effect">BACK</a>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript">
+	var allvalues = {{ branches | dump | safe }};
+	console.log(allvalues);
+	$("#banks").on("change", function(){
+		var selectedID = $("#banks option:selected").val()
+		console.log(selectedID);
+		$("#branches").empty()
+		allvalues.forEach(function(tmp, index){
+			if(selectedID != tmp.bank_id) return false
+				$("#branches").append(new Option(tmp.address, tmp.id));
+		})	
+	})
+
+
+</script>
+{% endblock %}

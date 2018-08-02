@@ -1,0 +1,308 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+		<!-- Exportable Table -->
+		<div class="row clearfix"> 
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+				<div class="card"> 
+					<div class="header"> 
+						<h2> View Cards  </h2>
+					 </div>
+				<div>
+				<div class="body"> 
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Issuer Name </label>
+								<span> {{card.bank.bankname }}  <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Card Name </label>
+							<span> {{card.cardname}}<span>
+						 </div>
+					 </div>
+
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Service Type </label>
+							<span> {{card.servicetype	}} <span>
+						 </div>
+
+					 </div>
+
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">  Targeted Users </label>
+							<span> {{card.targeted_users}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Credit Needed </label>
+							<span> {{card.credit_needed }}  <span>
+						 </div>
+					 </div>
+
+					 	<div class="row form-group"> 
+						 	<div class="col-sm-6">  
+						 		<label class="col-sm-4">Cards Background </label>
+						 			<span class="image"><img src="{{card.cardback}}" width="100px"></span>
+						 	 </div>
+						 	<div class="col-sm-6">  
+						 		<label class="col-sm-4">Card Front Image </label>
+						 			<span class="image"><img src="{{card.frontimage}}" width="100px"></span>
+					 	 </div>
+					  </div>
+
+
+				 </div>
+
+			 </div>
+
+		 </div>
+		 <div class="row clearfix"> 
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+				<div class="card"> 
+					<div class="header"> 
+						<h2>  </h2>
+					 </div>
+				<div>
+				<div class="body"> 
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Late Payment Fee </label>
+							<span> 	{{card.late_payment}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Forign Transaction Fee </label>
+							<span> {{card.forgin_tran}}<span>
+						 </div>
+					 </div>
+
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Returend Payment Fee </label>
+							<span> {{card.returned_pay}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Penalty  </label>
+							<span> {{card.penalty}} <span>
+						 </div>
+					 </div>
+
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Minimum Interest Charge </label>
+							<span> {{card.min_intrest}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Cash Advance Fee </label>
+							<span> {{card.cash_adv }}  <span>
+						 </div>
+					 </div>
+
+					 <div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Yearly Insurance Fee  </label>
+							<span> {{card.yearly_fee}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Yearly Insurance Fee for additional cards 
+					 </label>
+							<span> {{card.yearly_add }}  <span>
+						 </div>
+					 </div>
+
+ 				<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Yearly Insurance Fee  </label>
+							<span> {{card.yearly_fee}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Yearly Insurance Fee for additional cards 
+					 </label>
+							<span> {{card.yearly_add }}  <span>
+						 </div>
+					 </div>
+
+
+ 					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Re-insurance fee 
+  				</label>
+							<span> {{card.reissuance}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Add on card
+					 </label>
+							<span> {{card.add_card }}  <span>
+						 </div>
+					 </div>
+
+					 <div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Minimum Monthly 
+  				</label>
+							<span> {{card.minimum_monthly}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Monthly interest
+					 </label>
+							<span> {{card.minimum_monthly }}  <span>
+						 </div>
+						  
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Monthly Subscription Fee 
+  				</label>
+							<span> {{card.monthly_subscription}} <span>
+						 </div>
+					 </div>
+			 </div>
+		 </div>
+
+
+
+	 </div>
+	 <div class="row clearfix"> 
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+				<div class="card"> 
+					<div class="header"> 
+						<h2> </h2>
+					 </div>
+				<div>
+				<div class="body"> 
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Annual Fee
+						 </label>
+							<span> 	{{card.annualfee}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Grace Period </label>
+							<span> {{card.grace_period}}<span>
+						 </div>
+					 </div>
+
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Regular Purchase APR </label>
+							<span> {{card.regular_purchase}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Intro Purchase APR </label>
+							<span> {{card.intro_purchase}} <span>
+						 </div>
+					 </div>
+
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Intro BT APR </label>
+							<span> {{card.intro_bt}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Maximum Possible Cash withdrawal of Credit Limit </label>
+							<span> {{card.maximum_cash }}  <span>
+						 </div>
+					 </div>
+
+					 	<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Maximum Credit Limit SAR </label>
+							<span> {{card.maximum_credit	}} <span>
+						 </div>
+						
+				 </div>
+
+			 </div>
+
+		 </div>
+
+
+			 </div>
+  <div class="row clearfix"> 
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+				<div class="card"> 
+					<div class="header"> 
+						<h2> </h2>
+					 </div>
+				<div>
+				<div class="body"> 
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Signup Bonus
+						 </label>
+							<span> 	{{card.signup_bonus}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Reward rate
+					 </label>
+							<span> {{card.reward_rate}}<span>
+						 </div>
+					 </div>
+
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Reward Program
+ 						</label>
+							<span> {{card.reward_program}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Payment weaver in case of death </label>
+							<span> {{card.payment_death}} <span>
+						 </div>
+					 </div>
+
+					<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Remittance Services
+						 </label>
+							<span> {{card.remittance_services}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> 24x7 Telephonic Assistance </label>
+							<span> {{card.telephonic_ass }}  <span>
+						 </div>
+					 </div>
+
+					 <div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Protection Services
+						 </label>
+							<span> {{card.protection_services}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4"> Travel Insurance
+							 </label>
+							<span> {{card.travel_insurance }}  <span>
+						 </div>
+					 </div>
+
+						<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Airport Lounge Access
+						 </label>
+							<span> {{card.airport_lounge}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Extended Waranty </label>
+							<span> {{card.extended_waranty }}  <span>
+						 </div>
+					 </div>
+
+					 	<div class="row form-group"> 
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Card Category
+						 </label>
+							<span> {{card.card_category}} <span>
+						 </div>
+						<div class="col-sm-6">  
+							<label class="col-sm-4">Networks </label>
+							<span> {{card.network }}  <span>
+						 </div>
+					 </div>
+
+				 </div>
+
+		 </div>
+	 </div>
+	 	
+	 </div>
+	 	
+
+{% endblock %}

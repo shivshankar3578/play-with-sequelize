@@ -1,0 +1,78 @@
+TestApp: All{% extends "layouts/list.html" %} {% block pagewrapper %}
+<section class="content">
+	<div class="container-fluid">
+		<!--  <a href="/pages/add" class="btn btn-success" role="button">Add</a>-->
+		<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2>TestApp: All Enquires </h2>
+					<a style="float: right" model-name="enquiry"  class="btn btn-danger waves-effect ajax_deleteAll"> Delete selected</a>
+					<!-- <a style="float: right" model-name="enquiry"  model-status="1"  class="btn btn-success waves-effect ajax_chnageStatusAll"> Activate selected</a> -->
+					<!-- <a style="float: right" model-name="enquiry"  model-status="0"  class="btn btn-warning waves-effect ajax_chnageStatusAll"> Deactivate selected</a> -->
+					</div>
+					<div class="body">
+						<div class="table-responsive">
+					<table id="datalist" class="table table-bordered table-striped table-hover dataTable js-basic-example">
+								<thead>
+									<tr>
+										<th> </th>
+										<th>S.no</th>
+										<th>Issuer Name</th>
+										<th>Card Name</th>
+										<th>Companey Name</th>
+										<th>Employment Type</th>
+										<th>Month Salary</th>
+										<th>Name</th>
+										<th>Mobile</th>
+										<!-- <th data-sortable="false">Status</th> -->
+										<th data-sortable="false">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for enquiry in enquiries %}
+									<tr id="del_{{enquiry.id}}">
+										<td></td>
+										<td>{{ loop.index }}</td>
+										<td>{{ enquiry.card.bank.bankname }}</td>
+										<td>{{ enquiry.card.cardname }}</td>
+										<td>{{ enquiry.company_name }}</td>
+										<td>{{ enquiry.employment_type }}</td>
+										<td>{{ enquiry.month_salary }}</td>
+										<td>{{ enquiry.name }}</td>
+										<td>{{ enquiry.mobile }}</td>
+										<!-- <td data-sort="{{enquiry.status}}" >
+											{% if enquiry.status==1 %}
+											<div class="switch">
+												<label class="enquiry">
+												<input checked="checked" type="checkbox" data-id="{{enquiry.id}}">
+												<span class="lever switch-col-{{theme}}"></span></label>
+											</div>
+											{% else %}
+											<div class="switch">
+												<label class="enquiry">
+												<input type="checkbox" data-id="{{enquiry.id}}">
+												<span class="lever switch-col-{{theme}}"></span></label>
+											</div>
+											{% endif %}
+										</td> -->
+										<td>
+											<a href="/admin/leads/enquiry/view/{{enquiry.id}}"><i class="material-icons col-{{theme}}">folder_open</i></a>
+											<!-- <a href="/admin/enquiry/edit/{{enquiry.id}}" name="edit" value="edit"><i class="material-icons col-{{theme}}">edit</i></a> -->
+										<a model-name="enquiry" data-value="{{enquiry.id}}" class="ajax_delete"><i class="material-icons col-{{theme}}">delete</i></a>
+										</td>
+									</tr>
+									
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- #END# Exportable Table -->
+	</div>
+</section>
+{% endblock %}

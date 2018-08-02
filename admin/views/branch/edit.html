@@ -1,0 +1,173 @@
+{% extends "layouts/form.html" %}
+{% block pagewrapper %}
+	<!-- Exportable Table -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2> Edit Branch </h2>
+					</div>
+					<div class="body">
+						<form id="form_validation" method="POST" novalidate="novalidate" enctype="multipart/form-data">
+							
+							<div class="form-group form-float">
+								<label class="form-label required">Name</label>
+								<div class="form-line">
+									<input class="form-control" name="name" type="text" value="{{branch.name}}" required>
+							    </div>							
+							</div>
+							<div class="form-group form-float">
+								<label class="form-label required">Name (Arabic)</label>
+								<div class="form-line">
+									<input class="form-control" name="name_ar" type="text" value="{{branch.name_ar}}" required>
+							    </div>							
+							</div>
+							<div class="form-group form-float">
+								<label class="form-label required">Telephone No </label>
+								<div class="form-line">
+									<input class="form-control" required name="telephone" type="text" value="{{branch.telephone}}" required  minlength="10"  maxlength="15">
+							</div>
+							
+							</div>
+
+							<!-- <div class="form-group form-float">
+									<label class="form-label required">Email </label>
+								<div class="form-line">
+									<input class="form-control" required name="email" type="email"  value="{{branch.email}}">
+								</div>
+							</div> -->
+
+							<div class="form-group form-float">
+								<label class="form-label required">Contact  </label>
+								<div class="form-line">
+									<input class="form-control" required name="contact" type="text" value="{{branch.contact}}"required>
+								</div>
+							</div>
+							
+								<div class="form-group form-float">
+									<label class="form-label required">Issuer Name </label>
+								<div class="form-line">
+									<select  required name="bank_id" class="form-control">
+										{% if user.bank %}
+												<option selected="" value="{{ user.bank.id }}"> {{user.bank.bankname}} </option>
+											{% else %}>	
+											{% for bank in banks %}
+												<option value="{{ bank.id }}" {% if card.bank_id == bank.id %} selected {% endif %}> {{ bank.bankname }}</option>
+											{% endfor %}
+										{% endif %}>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group form-float">
+								<label class="form-label required">Service Type</label>
+								<div class="form-line">
+								<select id="servicetype" name="servicetype[]" multiple="" required class="form-control">
+									{% for serviceType in defaults.serviceType %}
+									<option value="{{serviceType.id }}" >{{serviceType.name }}</option>
+									{% endfor %}
+									</select>
+								</div>
+							</div>
+							
+
+								<div class="form-group form-float ">
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+										<span class="image"><img src="{{branch.logo}}" height="150" width="150"></span><br>
+									</div>
+								</div>
+
+							
+							 <div class="row clearfix">
+								<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+									<label class="form-label required">Select Logo</label>
+									<input name="logo" type="file" class="btn waves-effect" />
+								</div>
+							</div>
+
+							
+
+							<div class="form-group form-float">
+									<label class="form-label">Google Map Address </label>
+								<div class="form-line">
+								<div id="map" class="gmap"></div>	
+									<input id="address" name="address" type="hidden" value="{{branches.address}}" id="address"/>
+									<input type="hidden" name="latitude" id="latitude" placeholder="Latitude" value="{{branches.latitude}}"/>
+									<input type="hidden" name="longitude" id="longitude" placeholder="Longitude" value="{{branches.latitude}}"/>
+								</div>
+							</div>
+
+							<button class="btn btn-primary waves-effect" type="submit"> SUBMIT </button>
+							<a href="/admin/branches/" class="btn btn-primary waves-effect"> BACK </a>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	 <script type="text/javascript">
+	var branch = {{ branch | dump | safe }}
+	branch.servicetype.forEach(v=>{
+		$('#servicetype option[value='+v+']').prop('selected', true);
+	})
+			function initMap() {
+		//autofill values in selected address
+			var myLatLng = {lat: {{branch.latitude}}, lng: {{branch.longitude}}};
+
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 7,
+				center: myLatLng
+			});  
+
+			var marker = new google.maps.Marker({
+				position: myLatLng,
+				map: map,
+				title: 'Location',
+				draggable:true
+			});
+			
+			var geocoder = new google.maps.Geocoder();
+	//select the location in map using geocoder
+			geocoder.geocode({
+					'latLng': myLatLng
+			}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+							if (results[0]) {
+									var geoCodeArr = results[0]['address_components'];
+									
+									//alert(results[0].formatted_address)
+									
+									$('#address').val(results[0].formatted_address);
+									$('#latitude').val(marker.getPosition().lat());
+									$('#longitude').val(marker.getPosition().lng());
+									
+							}
+					}
+			});
+			//we select the location on map 
+			google.maps.event.addListener(marker, 'dragend', function() {
+							geocoder.geocode({
+									'latLng': marker.getPosition()
+							}, function(results, status) {
+									if (status == google.maps.GeocoderStatus.OK) {
+											if (results[0]) {
+													var geoCodeArr = results[0]['address_components'];
+													
+												//  alert(results[0].formatted_address)
+													
+													$('#address').val(results[0].formatted_address);
+													$('#latitude').val(marker.getPosition().lat());
+													$('#longitude').val(marker.getPosition().lng());
+													
+											}
+									}
+							});
+					});
+		}
+			
+	</script>
+	<script async defer
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDieZ7uAY4DPdT3Z4fp4KtykHl6dWryYdw&callback=initMap">
+	</script>
+	{% endblock %}
